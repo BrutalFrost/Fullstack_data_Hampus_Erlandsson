@@ -167,3 +167,7 @@ cython_debug/
 *.dbeaver
 #duckdb
 *.wal
+*.DS_store
+raw_data
+cleaned_data
+youtube_data.db

@@ -32,3 +32,4 @@ if __name__ == "__main__":
         # queries
         query1 = db.query("SELECT * FROM information_schema.schemata;")
         print(query1)
+        

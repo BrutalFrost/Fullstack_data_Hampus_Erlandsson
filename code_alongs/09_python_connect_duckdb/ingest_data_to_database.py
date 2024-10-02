@@ -5,7 +5,6 @@ def setup_schema():
     with Database(DATABASE_PATH) as db:
         db.query(f"CREATE SCHEMA IF NOT EXISTS supplier_invoice;")
 
-
 def ingest_data():
     
     for csv_path in DATA_PATH.glob("Lev*.csv"):
@@ -14,11 +13,11 @@ def ingest_data():
 
         with Database(DATABASE_PATH) as db:
             db.query(f"""
+                --begin-sql
                 CREATE TABLE IF NOT EXISTS supplier_invoice.invoice_{invoice_name}
                 AS SELECT * FROM
                 read_csv_auto('{csv_path}', types={{'Organisationsnummer':'VARCHAR'}})
             """)
-
 
 if __name__ == '__main__':
     setup_schema()
