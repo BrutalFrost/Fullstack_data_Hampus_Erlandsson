@@ -31,17 +31,19 @@ FROM
 	innehall.totalt);
 
 
-CREATE TABLE IF NOT EXISTS marts.viewer_genders AS (
+CREATE TABLE IF NOT EXISTS marts.viewer_ages AS (
 SELECT
 	*
 FROM
 	tittare.tabelldata_kon);
 
-CREATE TABLE IF NOT EXISTS marts.viewer_ages AS (
+CREATE TABLE IF NOT EXISTS marts.viewer_genders AS (
 SELECT
 	*
 FROM
 	tittare.tabelldata_alder);
+
+
 
 CREATE TABLE IF NOT EXISTS marts.subsriber_ratio AS (
 SELECT
@@ -96,9 +98,7 @@ SELECT * FROM marts.subsriber_ratio;
 SELECT * FROM marts.subscriber_countries;
 
 SELECT 
-	Datum,
+	*
 
 FROM marts.views_and_subscribers
 ORDER BY Datum DESC;
-
-SELECT SUM(Visningar) FROM marts.views_and_subscribers

@@ -17,7 +17,6 @@ ON date_total.datum = date_table.datum;
 -- What hardware is used to watch
 SELECT * FROM enhetstyp.tabelldata;
 
-
 -- What country they are watching from
 SELECT * FROM geografi.tabelldata;
 
@@ -60,10 +59,11 @@ SELECT
 EXCLUDE(Städer)
 FROM stader.tabelldata;
 
--- Genders of viewers
+-- Genders of viewers for some reason
 SELECT * FROM tittare.tabelldata_alder;
 
--- Age of viewers
+SELECT * FROM tittare.tabelldata_al
+-- Age of viewers for some reason
 SELECT * FROM tittare.tabelldata_kon;
 
 -- How viewers found the videos
