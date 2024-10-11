@@ -1,9 +1,9 @@
-desc;
+DESC;
 
-SELECT
-	*
-FROM
-	information_schema.schemata;
+SELECT 
+	* 
+FROM information_schema.schemata 
+WHERE catalog_name = 'youtube_data';
 
 CREATE SCHEMA IF NOT EXISTS marts;
 
@@ -31,6 +31,42 @@ FROM
 	innehall.totalt);
 
 
+CREATE TABLE IF NOT EXISTS marts.viewer_genders AS (
+SELECT
+	*
+FROM
+	tittare.tabelldata_kon);
+
+CREATE TABLE IF NOT EXISTS marts.viewer_ages AS (
+SELECT
+	*
+FROM
+	tittare.tabelldata_alder);
+
+CREATE TABLE IF NOT EXISTS marts.subsriber_ratio AS (
+SELECT
+	*
+FROM
+	prenumerationsstatus.tabelldata);
+
+CREATE TABLE IF NOT EXISTS marts.subscriber_countries AS (
+SELECT
+	*
+FROM
+	geografi.tabelldata);
+
+CREATE TABLE IF NOT EXISTS marts.views_and_subscribers AS (
+	WITH
+		subscriber_source AS (SELECT Datum, SUM(Prenumeranter) AS Prenumeranter FROM prenumerationskalla.diagramdata GROUP BY Datum),
+		trafic_source AS (SELECT Datum, SUM(Visningar) AS Visningar FROM trafikkalla.diagramdata GROUP BY Datum)
+	SELECT 
+		subscriber_source.Datum,
+		subscriber_source.Prenumeranter,
+		trafic_source.Visningar
+	FROM subscriber_source
+	INNER JOIN trafic_source ON subscriber_source.Datum = trafic_source.Datum
+);
+
 
 SELECT
 	*
@@ -49,3 +85,20 @@ SELECT
 	*
 FROM
 	marts.views_per_date;
+
+
+SELECT * FROM marts.viewer_genders;
+
+SELECT * FROM marts.viewer_ages;
+
+SELECT * FROM marts.subsriber_ratio;
+
+SELECT * FROM marts.subscriber_countries;
+
+SELECT 
+	Datum,
+
+FROM marts.views_and_subscribers
+ORDER BY Datum DESC;
+
+SELECT SUM(Visningar) FROM marts.views_and_subscribers
