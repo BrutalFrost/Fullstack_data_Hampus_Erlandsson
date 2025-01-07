@@ -23,5 +23,12 @@ class ContentKPI:
         st.dataframe(df)
 
 # create more KPIs here
-class DeviceKPI:
-    pass 
+class GenderKPI:
+    def __init__(self) -> None:
+        self._content = QueryDatabase("SELECT * FROM marts.viewer_ages;").df
+    def display_content(self):
+        df = self._content
+        st.markdown("## Ålders distribution")
+        
+        
+        
